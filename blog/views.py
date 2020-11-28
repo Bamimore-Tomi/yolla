@@ -12,7 +12,7 @@ class HomeView(ListView):
     paginate_by = 5
     
     def get_queryset(self):
-        """Filter and order by different values if it is provided in GET parameters"""
+        #Filter and order by different values if it is provided in GET parameters
         try:
             if "sort" in self.request.GET:
                 if self.request.GET["sort"]=="a":
