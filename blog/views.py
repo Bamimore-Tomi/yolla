@@ -80,7 +80,6 @@ class PostEditView(UpdateView):
     fields = ["category","title","author","content"]
     
     def post(self,request,*args,**kwargs):
-        print("Here is the CATEGORY",request.POST)
         category = Category.objects.get_or_create(title=request.POST.get("category"))[0]
         request.POST=request.POST.copy()
         request.POST["category"]=category
