@@ -1,6 +1,6 @@
 from django.shortcuts import render,get_object_or_404,redirect
 from django.views.generic import ListView, DetailView,CreateView, DeleteView,UpdateView
-from django.views.generic.base import TemplateView
+from django.db.models import Q
 from django.urls import reverse
 from .models import Post, Category
 from .forms import CommentForm, PostForm
@@ -11,7 +11,27 @@ class HomeView(ListView):
     context_object_name = "posts"
     paginate_by = 5
     
-    # Overriding post method to allow this view recieve comment.
+    def get_queryset(self):
+        """Filter and order by different values if it is provided in GET parameters"""
+        try:
+            if "sort" in self.request.GET:
+                if self.request.GET["sort"]=="a":
+                    return Post.objects.all().order_by("published_date")
+                elif self.request.GET["sort"]=="activity":
+                    return Post.objects.all().order_by("-comment_count")
+                elif self.request.GET["sort"]=="category":
+                    return Post.objects.all().order_by("-category")
+            if "search" in self.request.GET:
+                query = Post.objects.filter(Q(title__icontains=self.request.GET["search"]) |
+                                             Q(content__icontains=self.request.GET["search"]))
+                print(query)
+                if query is not None:
+                    return query
+        except:
+            pass
+        return super().get_queryset()
+    # Overriding post method to allow this view rec
+    # ieve comment.
     def post(self, request, *args, **kwargs):
         # Getting the related post oject based on the post primary key, used as a hidden field the the form.
         post = Post.objects.get(id=int(request.POST.get("post")))
@@ -23,14 +43,14 @@ class HomeView(ListView):
             form.save()
             return redirect("/")
         else:
-            # This block should return error it there are after form validation. This is not currently setup in the templates.'
+            # This block should return error it there are after form validation. This is not currently setup in the templates."
             # For now, this just returns a redirect
             return redirect("/")
             
     
 class PostCreateView(CreateView):
     model = Post
-    fields = ['category','title','author','content']
+    fields = ["category","title","author","content"]
     def post(self, request, *args,**kwargs):
         # Returns Object and a boolean
         category = Category.objects.get_or_create(title=request.POST.get("category"))[0]
@@ -57,7 +77,7 @@ class PostDetailView(DetailView):
         return context
 class PostEditView(UpdateView):
     model = Post
-    fields = ['category','title','author','content']
+    fields = ["category","title","author","content"]
     
     def post(self,request,*args,**kwargs):
         print("Here is the CATEGORY",request.POST)

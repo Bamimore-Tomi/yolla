@@ -28,26 +28,27 @@
     </nav>
   </div>
  <div class=" center-align searchh container">
-    <form class="form">
+    <form method="GET" class="form">
       <div class="input-field">
-        <input placeholder="Search here..." class="searchb" id="search" type="search" required>
+        <input placeholder="Search for keywords here" class="searchb" id="search" name="search" type="search" required>
         <label class=" label-icon" for="search"><i class="red-text material-icons">search</i></label>
-        <div class="dropdown open">
-          <button class="btn btn-secondary dropdown-toggle" type="button" id="triggerId" data-toggle="dropdown" aria-haspopup="true"
-              aria-expanded="false">
-                All
-              </button>
-          <div class="dropdown-menu" aria-labelledby="triggerId">
-            <button class="dropdown-item" href="#">latest post</button>
-            <button class="dropdown-item " href="#">Most read</button>
-            <button class="dropdown-item " href="#">Older post</button>
-
-          </div>
-        </div>
-
       </div>
     </form>
+    <div class="dropdown open">
+      <a href="/"><button class="btn btn-secondary dropdown-toggle" type="button" id="triggerId" data-toggle="dropdown" aria-haspopup="true"
+          aria-expanded="false">
+            Clear Filters
+          </button></a>
+      <div class="dropdown-menu" aria-labelledby="triggerId">
+        <a href="/?sort=a"><button  class="btn btn-secondary dropdown-toggle" class="dropdown-item" >Ascending</button></a>
+        <a href="/?sort=activity"><button  class="btn btn-secondary dropdown-toggle" class="dropdown-item " href="#">Most Activity</button></a>
+        <a href="/?sort=category"><button  class="btn btn-secondary dropdown-toggle" class="dropdown-item " href="#">Category</button></a>
+
+      </div>
+    </div>
+
  </div>
+
  <!-- <div class=" center-align searchh container">
   <form class="form">
     <div class=" input-field">
@@ -136,6 +137,9 @@
 
 
  <a class="btn-floating iconm waves-effect waves-light lighten-2 red" href="{{ post.get_absolute_url }}delete"><i class=" large material-icons">delete</i></a>
+ {% if post.comment_count > 0  %}
+ <p class="iconm waves-effect waves-light lighten-2 red">{{ post.comment_count }} comment(s)</p>
+ {% endif %}
         </div>
       </div>
     </div>
