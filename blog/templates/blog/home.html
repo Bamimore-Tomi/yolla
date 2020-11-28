@@ -1,0 +1,183 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <!-- <link rel="stylesheet" href="{% static 'blog/css/bootstrap.min.css' %}"> -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+  
+  <link rel="stylesheet" type="text/css" href="{% static 'blog/css/materialize.min.css' %}">
+  
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> 
+  
+ <link rel="stylesheet" type="text/css" href="{% static 'blog/css/home.css' %}">
+   
+   </head>
+   
+   <body>
+ 
+ 
+ <div class="navbar-sticky">
+    <nav>
+      <div class="nav-wrapper grey darken-4 navbarr">
+        <a href="#!" class="  brand-logo">MyBlog</a>
+    
+      </div>
+    </nav>
+  </div>
+ <div class=" center-align searchh container">
+    <form class="form">
+      <div class="input-field">
+        <input placeholder="Search here..." class="searchb" id="search" type="search" required>
+        <label class=" label-icon" for="search"><i class="red-text material-icons">search</i></label>
+        <div class="dropdown open">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="triggerId" data-toggle="dropdown" aria-haspopup="true"
+              aria-expanded="false">
+                All
+              </button>
+          <div class="dropdown-menu" aria-labelledby="triggerId">
+            <button class="dropdown-item" href="#">latest post</button>
+            <button class="dropdown-item " href="#">Most read</button>
+            <button class="dropdown-item " href="#">Older post</button>
+
+          </div>
+        </div>
+
+      </div>
+    </form>
+ </div>
+ <!-- <div class=" center-align searchh container">
+  <form class="form">
+    <div class=" input-field">
+      <input placeholder="Search here..." class="searchb" id="search" type="search" required>
+      <label class=" label-icon" for="search"><i class="red-text material-icons">search</i></label>
+      <i class="material-icons">close</i>
+    </div>
+  </form>
+</div> -->
+
+ <!-- Add Post Button -->
+    <div class="button-addPost">
+      <a href="{% url 'post-create' %}"><button type="button" class="btn btn-post">
+        <i class="fa fa-plus" aria-hidden="true"></i> Add Post
+      </button></a>
+  </div>
+    <!-- End of segment -->
+
+    {% for post in posts %}
+  <div class="card ">
+    <div class="row  cardr">
+      <div class="col s12 m3">
+        <div class="center-align 
+        card-image">
+         <h2 class="card-image-text">{{ post.title|slice:":1" }}</h2>
+        
+          <a class="hide-on-med-and-up btn-floating  halfway-fab waves-effect waves-light red"><i class=" large material-icons">edit</i></a>
+        </div>
+        </div>
+        <div class="main2 col s12 m9">
+  <span class="red-text text-lighten-2 cardt card-title">{{ post.title }}</span>  
+ <span class=" grey-text text-darken-1 author">
+    by {{ post.author }}
+ </span>
+ <div class="divider"></div>
+
+        <div class="cardc">
+        <p>{{ post.content| truncatechars:50 }}
+        <a href="{{ post.get_absolute_url }}"><span class="grey-text text-darken-1">read more</span></p></a>
+        </div>
+
+<div class="cardact card-action">
+ <a href="{{ post.get_absolute_url }}edit" class="btn-floating hide-on-small-only icona lighten-2 waves-effect waves-light red"><i class=" large material-icons">edit</i></a>
+          <a class="lighten-2 btn-floating icona waves-effect waves-light red"><i class=" large material-icons">thumb_up</i></a>
+ <a class="lighten-2 btn-floating iconm waves-effect waves-light red"><i class=" large material-icons">thumb_down</i></a>
+ 
+ 
+ <a class="modal-trigger
+ lighten-2 btn-floating iconm waves-effect waves-light red" 
+ href="#modal1"
+ ><i class=" large material-icons ">comment</i></a>
+ 
+ <div id="modal1" class="modal previeww">
+    <div class="modal-content ">
+      <h4 class="preview_h red-text center-align">Comment</h4>
+      <div class="divider"></div>
+    <div class="row formbody z-depth-0">
+    <form method="POST" action="{% url 'home' %}" class="col s12">
+      {% csrf_token %}
+      <input type="hidden" name="post" value="{{ post.id }}">
+<div class="row first">
+        <div class="input-field col s12">
+          <input id="postt" type="text" name="author" class="validate">
+          <label  for="postt">Your Name</label>
+        </div>
+        </div>
+<div  class="row  third">
+     
+        <div  class="input-field col s12">
+       
+          <textarea  placeholder="Post your comment here..." name="content" id="textarea1" class="texta"></textarea>
+          <label class=" red-text lab" for="textarea1"></label>
+        </div>
+      </div>
+   <div class="center-align">
+            
+
+<button  class="  btn red lighten-1 waves-effect waves-light" type="submit">Submit
+    <i class="material-icons right">send</i>
+  </button>
+        </div>      
+</div>
+</form>
+</div>
+</div>
+
+
+ <a class="btn-floating iconm waves-effect waves-light lighten-2 red" href="{{ post.get_absolute_url }}delete"><i class=" large material-icons">delete</i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+
+ 
+    {% if is_paginated %}
+    <div class="paginator-container">
+      <div class="center">
+    {% if page_obj.has_previous %}
+      <a class="waves-effect red lighten-2 btn" href="?page=1">First</a>
+      <a class="waves-effect red lighten-2 btn" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+    {% endif %}
+  
+    {% for num in page_obj.paginator.page_range %}
+        {% if page_obj.number == num %}
+          <a class="waves-effect red lighten-2 btn" href="?page={{ num }}">{{ num }}</a>
+        {% elif num  > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+          <a class="waves-effect red lighten-2 btn" href="?page={{ num }}">{{ num }}</a>
+        {% endif %}
+    {% endfor %}
+  
+      {% if page_obj.has_next %}
+        <a class="waves-effect red lighten-2 btn" href="?page={{ page_obj.next_page_number }}">Next</a>
+        <a class="waves-effect red lighten-2 btn" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+      {% endif %}
+    </div>
+  </div>
+  {% endif %} 
+  
+  <script src="{% static 'blog/js/bootstrap.min.js' %}"></script>
+  <script type='text/javascript' src="{% static 'blog/js/jquery-3.3.1.min.js' %}"></script>
+  <script src="{% static 'blog/js/materialize.min.js' %}"></script>
+  
+  
+ 
+ <script type="text/javascript">
+      
+        $(document).ready(function(){
+    $('.modal').modal();
+  });
+  </script>
+
+  </body>

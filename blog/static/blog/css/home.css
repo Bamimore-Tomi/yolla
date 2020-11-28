@@ -1,0 +1,120 @@
+.card-image-text {
+font-size: 120px;
+color:grey;
+}
+
+.card-image {
+    background: lightgrey;
+position: relative;
+top: -10px;
+    
+    
+    
+    
+}
+
+.card {
+    
+    margin: 1rem;
+    border-top: 1px solid red;
+    
+    
+}
+  .texta {
+       
+       height: 400px;
+       border-radius: 15px ;
+       padding: 20px;
+       
+   }
+textarea:focus {
+    outline: none;
+}
+
+.input-field label.lab {
+    font-size: 20px;
+    position: relative;
+    /* top:  ; */
+}
+.cardt {
+    font-weight: 900;
+}
+.card-title{
+    font-size: 30px !important;
+    font-weight: 700 !important;
+    
+}
+i.acctc {
+    margin-top:10px;
+    margin-right: 4px;
+}
+
+.author {
+    position:relative;
+    top: -2px;
+    left:7px;
+}
+/* .cardr {
+    
+    
+} */
+.icona {
+    margin-left: -20px;
+    margin-right: 44px;
+}
+.iconm {
+    margin-left: -20px;
+    margin-right: 40px;
+
+}
+
+@media only screen and (min-width: 500px) {
+    
+    
+     .main2 {
+    margin-top: 25px;
+}
+
+.iconm {
+    margin-left: -15px;
+    
+}
+
+
+
+}
+
+.input-field input[type=search] {
+
+    margin-left: 42px;
+    width: 84%;
+    position:relative;
+    top:-10px;
+}
+
+.searchh {
+    
+    margin-bottom: 30px;
+}
+.paginator-container{
+    justify-content: center;
+    display: flex;
+}
+.center {
+width: 800px;
+}
+
+/* New Stylings */
+.button-addPost {
+    position: relative;
+    text-align: right;
+    padding: 10px 20px;
+}
+.btn-post {
+    background-color: red;
+    border-radius: 8px;
+}
+button.btn-post:hover,
+button.btn-post:focus {
+    background-color: red;
+}

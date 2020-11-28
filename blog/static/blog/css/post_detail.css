@@ -1,0 +1,118 @@
+.card-image-text {
+font-size: 120px;
+color:grey;
+}
+
+.card-image {
+    background: lightgrey;
+position: relative;
+top: -10px;
+
+    
+    
+    
+    
+}
+
+.card {
+    
+    margin: 1rem;
+    
+    
+}
+
+.cardt {
+    font-weight: 900;
+}
+
+p.cardc{
+    font-size: 15px ;
+    /* font-family: ; */
+}
+.card-title{
+    font-size: 30px !important;
+    font-weight: 700 !important;
+    
+}
+.icona {
+    margin-left: -20px;
+    margin-right: 10px;
+}
+.iconm {
+    margin-left: -20px;
+    margin-right: 40px;
+
+}
+.date {
+    font-size: 18px;
+
+}
+i.acctc {
+    margin-top:10px;
+    margin-right: 4px;
+}
+
+.author {
+    position:relative;
+    top: -6px;
+}
+/* .divv {
+    
+} */
+
+.authh {
+    margin-top:-7px;
+}
+@media only screen and (min-width: 500px) {
+    
+    
+     .main2 {
+    margin-top: 5px;
+}
+
+  .main22 {
+    margin-top: 25px;
+}
+
+.iconm {
+    margin-left: -15px;
+    
+}
+.card {
+    width: 80%;
+    margin-left: 10%;
+}
+
+
+}
+
+
+.related {
+    margin-top: 50px;
+    margin-bottom: 20px;
+}
+
+/* new styling */
+.container {
+    width: 100%;
+    
+}
+.card-body{
+    position: relative;
+    overflow-y: scroll;
+    padding: 0 20px 20px 20px;
+    height: calc(100vh - 52px);
+    padding-bottom: 150px;
+}
+
+.card-img img {
+    width: 50%;
+}
+.card-body p{
+    font-size: 16px;
+    font-family: Arial, Helvetica, sans-serif;
+} 
+
+img.w-50 {
+    border-radius: 50%;
+}

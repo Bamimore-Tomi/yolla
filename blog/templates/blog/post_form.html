@@ -1,0 +1,167 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <link rel="stylesheet" type="text/css" href="{% static 'blog/css/materialize.min.css' %}">
+  
+   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> 
+   
+  <link rel="stylesheet" type="text/css" href="{% static 'blog/css/post_form.css' %}">
+
+  
+   
+   </head>
+   
+   <body>
+ <div class="navbar-sticky">
+    <nav>
+      <div class="nav-wrapper grey darken-4 navbarr">
+        <a href="{% url 'home' %}" class="  brand-logo">Yolla</a>
+    
+      </div>
+    </nav>
+  </div>
+    <div class='mainh red lighten-2 center-align '>
+           <h5 class="white-text  text-darken-3">
+               Create a new Post
+           </h5>
+       </div>
+  
+  <div class="row formbody container z-depth-2">
+    {% if post %}
+    <form method="POST" class="col s12">
+    {% else %}
+      <form method="POST" action="{% url 'post-create' %}" class="col s12">
+    {% endif %}
+      {% csrf_token %} 
+<div class="row first">
+        <div class="input-field col s12">
+          <input name="title" value="{{ post.title }}"placeholder="Title" id="postt" type="text" class="validate">
+          <label  for="postt">Post title</label>
+        </div>
+        </div>
+        <div class="center-align">
+
+ <a class=" btn-floating iconf  firstf waves-effect waves-light lighten-1 red"><i class=" large material-icons">forward</i></a>
+        
+        </div>
+<div hidden class="  selectt second">
+
+    <select name="category" class="browser-default">
+      {% if post.category %}
+    <option value="{{ post.category }}">{{ post.category }}</option>
+      {% else %}
+    <option value="" disabled selected>Category</option>
+      {% endif %}
+      <option value="Food">Food</option>
+      <option value="Technology">Technology</option>
+   <option value="Science">Science</option>
+  <option value="Programming">Programming</option>
+        </select>
+   
+  </div>
+ <div hidden class="seconda center-align">
+ <a  class="secondb btn-floating iconc  waves-effect waves-light lighten-1 red"><i class=" large material-icons">arrow_back</i></a>
+ <a class="secondf  btn-floating iconc  waves-effect waves-light red "><i class=" large material-icons">forward</i></a>
+        
+        </div>
+  
+      <div hidden class="row  third">
+     
+        <div  class="input-field col s12">
+       
+          <textarea  name="content"placeholder="Post content here..." id=" textarea1" class="texta">{{ post.content }}</textarea>
+          <label class="lab" for="textarea1">Content</label>
+        </div>
+      </div>
+ <div hidden class="thirda center-align">
+ <a class="thirdb  btn-floating iconf  waves-effect waves-light lighten-1 red"><i class=" large material-icons">arrow_back</i></a>
+ <a class="thirdf btn-floating iconf  waves-effect waves-light lighten-1 red"><i class=" large material-icons">forward</i></a>
+        
+        </div>
+<div hidden class="fourth  row">
+        <div class="input-field col s12">
+          <input
+          placeholder="Pen Name" id="author" value="{{ post.author }}" name="author" type="text" class="validate">
+          <label for="author">Pen Name</label>
+        </div>
+        </div>
+        
+        <div hidden class="fourtha submitb center-align">
+            
+ <a class="fourthb  btn-floating iconf  waves-effect waves-light lighten-1 red"><i class=" large material-icons">arrow_back</i></a>
+
+<button  class="fourthf   btn red lighten-1 waves-effect waves-light" type="submit">Submit
+    <i class="material-icons right">send</i>
+  </button>
+        </div>
+        
+        
+    </form>
+  </div>
+  <script type='text/javascript' src="{% static 'blog/js/jquery-3.3.1.min.js' %}"></script>
+  <script src="{% static 'blog/js/materialize.min.js' %}"></script>
+<script type='text/javascript'>
+  $(document).ready(function(){
+ $('.firstf').click( function() {
+    $('.first').hide()
+        $('.firstf').hide()
+        $('.second').show()
+        $('.seconda').show()
+        
+    }
+    )
+    
+ $('.secondb').click( function() {
+    $('.firstf').show()
+        $('.first').show()
+        $('.second').hide()
+        $('.seconda').hide()
+    
+    }
+    )
+    
+ $('.secondf').click( function() {
+    $('.first').hide()
+        $('.second').hide()
+        $('.seconda').hide()
+        $('.third').show()
+        $('.thirda').show()
+        
+    }
+    )
+    
+ $('.thirdb').click( function() {
+    $('.third').hide()
+        $('.thirda').hide()
+        $('.second').show()
+        $('.seconda').show()
+        
+
+    }
+    )
+ $('.thirdf').click( function() {
+    $('.third').hide()
+        $('.thirda').hide()
+        $('.fourth').show()
+        $('.fourtha').show()
+    
+    }
+    )
+  $('.fourthb').click( function() {
+    $('.third').show()
+        $('.thirda').show()
+        $('.fourth').hide()
+        $('.fourtha').hide()
+    
+    }
+    )
+
+    
+  }
+  )
+  </script>
+   </body>
